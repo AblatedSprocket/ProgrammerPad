@@ -1,0 +1,106 @@
+﻿<UserControl x:Class="ProgrammerPad.ColorPalette.ColorPaletteView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="200">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="{x:Type Slider}">
+            <Setter Property="Maximum" Value="255" />
+            <Setter Property="IsSnapToTickEnabled" Value="True" />
+            <Setter Property="Minimum" Value="0" />
+            <Setter Property="TickFrequency" Value="1" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+    </UserControl.Resources>
+    <Grid DataContext="{Binding}" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Border Background="{Binding Color.Hex}"
+               Grid.Column="0"
+               Grid.Row="0"
+               Height="30"
+               Margin="10"
+               Width="30"
+                CornerRadius="15"/>
+        <TextBox Text="{Binding Color.Hex}"
+                 Foreground="Black"
+                 Grid.Column="1"
+                 Grid.Row="0"
+                 Margin="10"
+                 HorizontalAlignment="Left"
+                 Width="80">
+        </TextBox>
+        <Button Command="{Binding UpdateColorCommand}"
+                CommandParameter="{Binding Color.Hex}"
+                ToolTip="Display color palette"
+                Grid.Column="2"
+                Grid.Row="0">
+            <Image Source="/Graphics/Color_Palette_32x.png"/>
+        </Button>
+        <Label Content="R"
+               Foreground="Black"
+               Grid.Column="0"
+               Grid.Row="1"
+               Margin="10"
+               FontWeight="Bold"/>
+        <Slider Name="redSlider"
+                Value="{Binding Color.Red, Mode=TwoWay}"
+                Grid.Column="1"
+                Grid.Row="1"/>
+        <TextBox Text="{Binding Color.Red, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 Grid.Column="2"
+                 Grid.Row="1"
+                 Height="20"
+                 Width="30"/>
+        <Label Content="G"
+               Foreground="Black"
+               Grid.Column="0"
+               Grid.Row="2"
+               Margin="10"
+               FontWeight="Bold"/>
+        <Slider Name="greenSlider"
+                Value="{Binding Color.Green, Mode=TwoWay}"
+                Grid.Column="1"
+                Grid.Row="2"/>
+        <TextBox Text="{Binding Color.Green, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 Grid.Column="2"
+                 Grid.Row="2"
+                 Height="20"
+                 Width="30"/>
+        <Label Content="B"
+               Foreground="Black"
+               Grid.Column="0"
+               Grid.Row="3"
+               Margin="10"
+               FontWeight="Bold"/>
+        <Slider Name="blueSlider"
+                Value="{Binding Color.Blue, Mode=TwoWay}"
+                Grid.Column="1"
+                Grid.Row="3"/>
+        <TextBox Text="{Binding Color.Blue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 Grid.Column="2"
+                 Grid.Row="3"
+                 Height="20"
+                 Width="30"/>
+    </Grid>
+</UserControl>
